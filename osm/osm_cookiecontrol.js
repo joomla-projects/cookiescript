@@ -64,7 +64,6 @@ var config = {
 					onRevoke: function() {
 						CookieControl.delete('IDE');
 					},
-		      recommendedState: true
 				},
 		    {
 			name: 'accept',
