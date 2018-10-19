@@ -52,7 +52,8 @@ var config = {
 					CookieControl.delete('_ga');
 					CookieControl.delete('_gid');
 				},
-				recommendedState: true
+				recommendedState: true,
+				lawfulBasis: 'legitimate interest'
 				},
 				{
 					name: 'advertising',
