@@ -63,7 +63,7 @@ var config = {
 					onAccept: function() {},
 					onRevoke: function() {
 						CookieControl.delete('IDE');
-					},
+					}
 				},
 		    {
 			name: 'accept',
