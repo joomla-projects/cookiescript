@@ -1,5 +1,5 @@
 //GTM id - originally belongs to index
-//var gtmeye = 'ID'; exploded from GTM-ID
+//var propertyGtmId = 'GTM-{ID}'; exploded from GTM-ID
 
 //Works the same for Google Analytics, Advertising or Marketing scripts etc.
 
@@ -43,14 +43,12 @@ var config = {
         description: 'Performance cookies help us to improve our website by collecting and reporting information, on its usage.',
         cookies: ['_dc_gtm_UA*','_ga','_gid','GPS','YSC','wistia-http2-push-disabled','di2','loc','ouid','uid','uvc','vc','TapAd_DID ','TapAd_TS ','1P_JAR','phpbb3_cnuw4_k','d','mc','KADUSERCOOKIE','KTPCACOOKIE','__utma','__utmb','__utmc','__utmz','AMCVS_','AMCVS_','AMCV_','PP','PPP','_gat_partnerTracker','_gat_spreadshirtTracker','demdex','uvts'],
         onAccept: function() {
-          if((typeof gtmEye !== 'undefined') && (gtmEye != 'empty')){
+          if((typeof propertyGtmId !== 'undefined')){
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-'+gtmEye);
-          }else{
-            console.log(gtmEye);
+            })(window,document,'script','dataLayer',propertyGtmId);
           }
          },
         onRevoke: function() {
