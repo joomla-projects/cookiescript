@@ -1,5 +1,12 @@
 //GTM id - originally belongs to index
-//var gtmeye = 'ID'; exploded from GTM-ID
+//var propertyGtmId = 'GTM-{ID}'; exploded from GTM-ID
+//var propertyUaId = 'UA-XXXXXX'
+//var propertyAwId = 'AW-XXXXXX' 
+//var propertyTwitter = script tags
+//var propertyFacebookId = xxxxxxxxxxxxxxxx
+//var propertyAddThis = script tags
+//var propertyAddThisId = ra-xxxxxxxxxxxxxx
+//var propertyPingdomId = apiKey;
 
 //Works the same for Google Analytics, Advertising or Marketing scripts etc.
 
@@ -43,15 +50,22 @@ var config = {
         description: 'Performance cookies help us to improve our website by collecting and reporting information, on its usage.',
         cookies: ['_dc_gtm_UA*','_ga','_gid','GPS','YSC','wistia-http2-push-disabled','di2','loc','ouid','uid','uvc','vc','TapAd_DID ','TapAd_TS ','1P_JAR','phpbb3_cnuw4_k','d','mc','KADUSERCOOKIE','KTPCACOOKIE','__utma','__utmb','__utmc','__utmz','AMCVS_','AMCVS_','AMCV_','PP','PPP','_gat_partnerTracker','_gat_spreadshirtTracker','demdex','uvts'],
         onAccept: function() {
-          if((typeof gtmEye !== 'undefined') && (gtmEye != 'empty')){
+          if((typeof propertyGtmId !== 'undefined')){
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-'+gtmEye);
-          }else{
-            console.log(gtmEye);
+            })(window,document,'script','dataLayer',propertyGtmId);
           }
+          if((typeof propertyUaId !== 'undefined')){
+            document.write('<script async src="https://www.googletagmanager.com/gtag/js?id='+propertyUaId+'"></script>');
+  
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', propertyUaId, {'anonymize_ip':true});
+		  }
          },
         onRevoke: function() {
           CookieControl.delete('_dc_gtm_UA*');
@@ -93,8 +107,20 @@ var config = {
         name: 'functionality',
         label: 'Functionality Cookies',
         description: 'Functionality cookies are responsible for the partial functionality of this website during your navigation. By deactivating them, you might have limited access on our or third party website\'s features.',
-        cookies: ['PREF','VISITOR_INFO1_LIVE','rl_modals','__distillery','AWSALB','__atuvc','__atuvs','MoodleSession','ct_checkjs','ct_fkp_timestamp','ct_pointer_data','ct_ps_timestamp','ct_timezone','__utmt','_sdsat_BasketAmountItems','affiliate','any_affiliate','direct_affiliate','s_cc','s_cc','s_sq','_rf','_uservoice_tz','_uvsid'],
-        onAccept: function() {},
+        cookies: ['PREF','VISITOR_INFO1_LIVE','rl_modals','__distillery','AWSALB','__atuvc','__atuvs','MoodleSession','ct_checkjs','ct_fkp_timestamp','ct_pointer_data','ct_ps_timestamp','ct_timezone','__utmt','_sdsat_BasketAmountItems','affiliate','any_affiliate','direct_affiliate','s_cc','s_cc','s_sq','_rf','_uservoice_tz','_uvsid','__cfduid'],
+        onAccept: function() {
+          if((typeof propertyPingdomId !== 'undefined')){
+		    var _prum = [['id', propertyPingdomId],
+		    ['mark', 'firstbyte', (new Date()).getTime()]];
+		    (function() {
+			  var s = document.getElementsByTagName('script')[0]
+			  , p = document.createElement('script');
+			  p.async = 'async';
+			  p.src = 'https://rum-static.pingdom.net/prum.min.js';
+			  s.parentNode.insertBefore(p, s);
+		    })();
+		  }
+        },
         onRevoke: function() {
           CookieControl.delete('PREF');
           CookieControl.delete('VISITOR_INFO1_LIVE');
@@ -119,6 +145,7 @@ var config = {
           CookieControl.delete('_rf');
           CookieControl.delete('_uservoice_tz');
           CookieControl.delete('_uvsid');
+          CookieControl.delete('__cfduid');
         },
         recommendedState: true
       },
@@ -127,7 +154,35 @@ var config = {
         label: 'Advertising',
         description: 'Advertising cookies help you see some ads based on your preferences. Joomla! serves or hosts ads as they are one of its major financial support.',
         cookies: ['OAID','IDE','ck1','drtn*','rlas3','rtn1-z','fr','everest_g_v2','everest_session_v2','gglck','NID','na_id','na_tc','id','mdata','dpm'],
-        onAccept: function() {},
+        onAccept: function() {
+          if((typeof propertyAwId !== 'undefined')){
+			 document.write('<script async src="https://www.googletagmanager.com/gtag/js?id=AW-976618339"></script>');
+			 window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', propertyAwId);
+            }
+		  if((typeof propertyTwitter !== 'undefined')){
+			 document.write('<script src="//platform.twitter.com/widgets.js" type="text/javascript" async="async"></script>');
+		    }
+		  if((typeof propertyFacebookId !== 'undefined')){
+			 !function(f,b,e,v,n,t,s)
+			 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+			 n.queue=[];t=b.createElement(e);t.async=!0;
+			 t.src=v;s=b.getElementsByTagName(e)[0];
+			 s.parentNode.insertBefore(t,s)}(window, document,'script',
+			 'https://connect.facebook.net/en_US/fbevents.js');
+			 fbq('init', propertyFacebookId);
+			 fbq('track', 'PageView');
+
+			 document.write('<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1490208684611957&ev=PageView&noscript=1" />');
+            }
+		  if((typeof propertyAddThis !== 'undefined')){
+			 document.write('<script async="" type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=joomlaorg" id="_carbonads_js"></script>');
+		    }
+		  if((typeof propertyAddThisId !== 'undefined')){
+		     document.write('<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid='+propertyAddThisId+'" type="text/javascript" async="async"></script>');
+			}
+        },
         onRevoke: function() {
           CookieControl.delete('OAID');
           CookieControl.delete('IDE');
